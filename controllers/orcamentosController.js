@@ -1,15 +1,15 @@
-const db = require('../db');
+import db from '../db/index.js';
 
-exports.getAllOrcamentos = async (req, res) => {
+export async function getAllOrcamentos(req, res) {
   try {
     const result = await db.query('SELECT * FROM orcamentos ORDER BY id DESC');
     res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 
-exports.getOrcamentoById = async (req, res) => {
+export async function getOrcamentoById(req, res) {
   try {
     const result = await db.query('SELECT * FROM orcamentos WHERE id = $1', [req.params.id]);
     if (!result.rows.length) return res.status(404).json({ error: 'Orçamento não encontrado' });
@@ -17,9 +17,9 @@ exports.getOrcamentoById = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 
-exports.createOrcamento = async (req, res) => {
+export async function createOrcamento(req, res) {
   const { cliente_id, destino, data_viagem, valor_estipulado, status } = req.body;
   try {
     const result = await db.query(
@@ -30,9 +30,9 @@ exports.createOrcamento = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 
-exports.updateOrcamento = async (req, res) => {
+export async function updateOrcamento(req, res) {
   const { cliente_id, destino, data_viagem, valor_estipulado, status } = req.body;
   try {
     const result = await db.query(
@@ -44,13 +44,13 @@ exports.updateOrcamento = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 
-exports.deleteOrcamento = async (req, res) => {
+export async function deleteOrcamento(req, res) {
   try {
     await db.query('DELETE FROM orcamentos WHERE id=$1', [req.params.id]);
     res.sendStatus(204);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}

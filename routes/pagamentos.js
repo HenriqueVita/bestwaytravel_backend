@@ -1,11 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const controller = require('../controllers/pagamentosController');
+import { Router } from 'express';
+const router = Router();
+import * as pagamentosController from '../controllers/pagamentosController.js';
 
-router.get('/', controller.getAllPagamentos);
-router.get('/:id', controller.getPagamentoById);
-router.post('/', controller.createPagamento);
-router.put('/:id', controller.updatePagamento);
-router.delete('/:id', controller.deletePagamento);
+router.get('/', pagamentosController.getAllPagamentos);
+router.get('/:id', pagamentosController.getPagamentoById);
+router.post('/', pagamentosController.createPagamento);
+router.put('/:id', pagamentosController.updatePagamento);
+router.delete('/:id', pagamentosController.deletePagamento);
 
-module.exports = router;
+export default router;

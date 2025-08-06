@@ -1,15 +1,15 @@
-const db = require('../db');
+import db from '../db/index.js';
 
-exports.getAllVendas = async (req, res) => {
+export async function getAllVendas(req, res) {
   try {
     const result = await db.query('SELECT * FROM vendas ORDER BY id DESC');
     res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 
-exports.getVendaById = async (req, res) => {
+export async function getVendaById(req, res) {
   try {
     const result = await db.query('SELECT * FROM vendas WHERE id=$1', [req.params.id]);
     if (!result.rows.length) return res.status(404).json({ error: 'Venda não encontrada' });
@@ -17,9 +17,9 @@ exports.getVendaById = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 
-exports.createVenda = async (req, res) => {
+export async function createVenda(req, res) {
   const { orcamento_id, cliente_id, valor_final, data_venda, observacoes } = req.body;
   try {
     const result = await db.query(
@@ -30,9 +30,9 @@ exports.createVenda = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 
-exports.updateVenda = async (req, res) => {
+export async function updateVenda(req, res) {
   const { orcamento_id, cliente_id, valor_final, data_venda, observacoes } = req.body;
   try {
     const result = await db.query(
@@ -44,13 +44,13 @@ exports.updateVenda = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 
-exports.deleteVenda = async (req, res) => {
+export async function deleteVenda(req, res) {
   try {
     await db.query('DELETE FROM vendas WHERE id=$1', [req.params.id]);
     res.sendStatus(204);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}

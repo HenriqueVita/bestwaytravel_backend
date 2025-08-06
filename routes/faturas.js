@@ -1,11 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const controller = require('../controllers/faturasController');
+import { Router } from 'express';
+const router = Router();
+import * as faturasController from '../controllers/faturasController.js';
 
-router.get('/', controller.getAllFaturas);
-router.get('/:id', controller.getFaturaById);
-router.post('/', controller.createFatura);
-router.put('/:id', controller.updateFatura);
-router.delete('/:id', controller.deleteFatura);
+router.get('/', faturasController.getAllFaturas);
+router.get('/:id', faturasController.getFaturaById);
+router.post('/', faturasController.createFatura);
+router.put('/:id', faturasController.updateFatura);
+router.delete('/:id', faturasController.deleteFatura);
 
-module.exports = router;
+export default router;

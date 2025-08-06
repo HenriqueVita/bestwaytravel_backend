@@ -1,15 +1,15 @@
-const db = require('../db');
+import db from '../db/index.js';
 
-exports.getAllFaturas = async (req, res) => {
+export async function getAllFaturas(req, res) {
   try {
     const result = await db.query('SELECT * FROM faturas ORDER BY id DESC');
     res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 
-exports.getFaturaById = async (req, res) => {
+export async function getFaturaById(req, res) {
   try {
     const result = await db.query('SELECT * FROM faturas WHERE id=$1', [req.params.id]);
     if (!result.rows.length) return res.status(404).json({ error: 'Fatura não encontrada' });
@@ -17,9 +17,9 @@ exports.getFaturaById = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 
-exports.createFatura = async (req, res) => {
+export async function createFatura(req, res) {
   const { venda_id, valor, vencimento, status } = req.body;
   try {
     const result = await db.query(
@@ -30,9 +30,9 @@ exports.createFatura = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 
-exports.updateFatura = async (req, res) => {
+export async function updateFatura(req, res) {
   const { venda_id, valor, vencimento, status } = req.body;
   try {
     const result = await db.query(
@@ -44,13 +44,13 @@ exports.updateFatura = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 
-exports.deleteFatura = async (req, res) => {
+export async function deleteFatura(req, res) {
   try {
     await db.query('DELETE FROM faturas WHERE id=$1', [req.params.id]);
     res.sendStatus(204);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}

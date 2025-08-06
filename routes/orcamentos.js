@@ -1,11 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const controller = require('../controllers/orcamentosController');
+import { Router } from 'express';
+const router = Router();
+import * as orcamentosController from '../controllers/orcamentosController.js';
 
-router.get('/', controller.getAllOrcamentos);
-router.get('/:id', controller.getOrcamentoById);
-router.post('/', controller.createOrcamento);
-router.put('/:id', controller.updateOrcamento);
-router.delete('/:id', controller.deleteOrcamento);
+router.get('/', orcamentosController.getAllOrcamentos);
+router.get('/:id', orcamentosController.getOrcamentoById);
+router.post('/', orcamentosController.createOrcamento);
+router.put('/:id', orcamentosController.updateOrcamento);
+router.delete('/:id', orcamentosController.deleteOrcamento);
 
-module.exports = router;
+export default router;

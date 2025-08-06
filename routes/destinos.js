@@ -1,11 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const controller = require('../controllers/destinosController');
+import { Router } from 'express';
+const router = Router();
+import * as destinosController from '../controllers/destinosController.js';
 
-router.get('/', controller.getAlldestinos);
-router.get('/:id', controller.getDestinoById);
-router.post('/', controller.createDestino);
-router.put('/:id', controller.updateDestino);
-router.delete('/:id', controller.deleteDestino);
+router.get('/', destinosController.getAllDestinos);
+router.get('/:id', destinosController.getDestinoById);
+router.post('/', destinosController.createDestino);
+router.put('/:id', destinosController.updateDestino);
+router.delete('/:id', destinosController.deleteDestino);
 
-module.exports = router;
+export default router;

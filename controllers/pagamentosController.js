@@ -1,15 +1,15 @@
-const db = require('../db');
+import db from '../db/index.js';
 
-exports.getAllPagamentos = async (req, res) => {
+export async function getAllPagamentos(req, res) {
   try {
     const result = await db.query('SELECT * FROM pagamentos ORDER BY id DESC');
     res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 
-exports.getPagamentoById = async (req, res) => {
+export async function getPagamentoById(req, res) {
   try {
     const result = await db.query('SELECT * FROM pagamentos WHERE id=$1', [req.params.id]);
     if (!result.rows.length) return res.status(404).json({ error: 'Pagamento não encontrado' });
@@ -17,9 +17,9 @@ exports.getPagamentoById = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 
-exports.createPagamento = async (req, res) => {
+export async function createPagamento(req, res) {
   const { fatura_id, data_pagamento, valor_pago, forma_pagamento } = req.body;
   try {
     const result = await db.query(
@@ -30,9 +30,9 @@ exports.createPagamento = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 
-exports.updatePagamento = async (req, res) => {
+export async function updatePagamento(req, res) {
   const { fatura_id, data_pagamento, valor_pago, forma_pagamento } = req.body;
   try {
     const result = await db.query(
@@ -44,13 +44,13 @@ exports.updatePagamento = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 
-exports.deletePagamento = async (req, res) => {
+export async function deletePagamento(req, res) {
   try {
     await db.query('DELETE FROM pagamentos WHERE id=$1', [req.params.id]);
     res.sendStatus(204);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
