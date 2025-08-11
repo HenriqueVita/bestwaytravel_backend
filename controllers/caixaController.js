@@ -33,7 +33,7 @@ export async function post (req, res, next) {
 }
 
 export async function fechar (req, res, next) {
-  const client = await db.pool.connect();
+  const client = await db.connect();
   try {
     const { id } = req.params;
     const { saldoFinal } = req.body;
