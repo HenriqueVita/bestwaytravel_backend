@@ -11,6 +11,8 @@ import faturasRoutes from './routes/faturas.js';
 import pagamentosRoutes from './routes/pagamentos.js';
 import usuariosRoutes from './routes/usuarios.js';
 import destinosRoutes from './routes/destinos.js';
+import lancamentosRoutes from './routes/lancamentos.js'
+import caixasRoutes from './routes/caixas.js'
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -26,6 +28,8 @@ app.use('/api/faturas', faturasRoutes);
 app.use('/api/pagamentos', pagamentosRoutes);
 app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/destinos', destinosRoutes);
+app.use('/api/lancamentos', lancamentosRoutes);
+app.use('/api/caixa', caixasRoutes);
 
 app.get('/', (req, res) => {
   res.send('API da Agência de Viagens está no ar!');
